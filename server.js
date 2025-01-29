@@ -22,6 +22,43 @@ mongoose
 app.use("/api/auth", authRoutes); // Authentication routes
 app.use("/api/listings", listingRoutes); // Listing routes
 
+// Health check endpoint
+app.get("/", (req, res) => {
+  res.send(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Campus Marketplace</title>
+          <style>
+            body { 
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+              margin: 0;
+              font-family: Arial, sans-serif;
+              background: #f0f2f5;
+            }
+            .status {
+              padding: 2rem;
+              background: white;
+              border-radius: 8px;
+              box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+              text-align: center;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="status">
+            <h1>🚀 Server is running</h1>
+            <p>Campus Marketplace API</p>
+            <p>Try <a href="/api/listings">/api/listings</a></p>
+          </div>
+        </body>
+      </html>
+    `);
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
